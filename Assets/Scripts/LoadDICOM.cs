@@ -8,11 +8,16 @@ using Dicom.Imaging.LUT;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA.Input;
-using HoloToolkit.Unity.InputModule.Utilities.Interactions;
-using HoloToolkit.Examples.InteractiveElements;
+using Microsoft.MixedReality.Toolkit.Input;
+//using HoloToolkit.Unity.InputModule.Utilities.Interactions;
+//using HoloToolkit.Examples.InteractiveElements;
 using System;
-using HoloToolkit.Unity.UX;
+//using HoloToolkit.Unity.UX;
 using HoloToolkit.Unity;
+using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.Toolkit.UI;
+using Unity.Mathematics;
+using Assets.Scripts.HoloToolkitLegacy;
 
 public class LoadDICOM : MonoBehaviour
 {
@@ -349,16 +354,16 @@ public class LoadDICOM : MonoBehaviour
 		directoryMap[testQuad] = series;
 		rootDirectoryMap[series] = rootDirectoryMap[directoryMap.ElementAt(1).Value];
 
-		testQuad.GetComponent<TwoHandManipulatable>().enabled = true;
-		testQuad.transform.Find("3D_toggle").gameObject.SetActive(true);
-		testQuad.transform.Find("3D_toggle").GetComponent<InteractiveToggle>().SetSelection(true);
+		//testQuad.GetComponent<TwoHandManipulatable>().enabled = true;
+		//testQuad.transform.Find("3D_toggle").gameObject.SetActive(true);
+		//testQuad.transform.Find("3D_toggle").GetComponent<InteractiveToggle>().SetSelection(true);
 		seriesHandler.ButtonPush("3D");
 		var slider = testQuad.transform.Find("zstack slider");
 		slider.gameObject.SetActive(true);
-		var sliderComponent = slider.GetComponent<SliderGestureControl>();
-		var n_images = series.LowerLevelDirectoryRecordCollection.Count();
-		sliderComponent.SetSpan(0, n_images);
-		sliderComponent.SetSliderValue(n_images / 2f);
+		//var sliderComponent = slider.GetComponent<SliderGestureControl>();
+		//var n_images = series.LowerLevelDirectoryRecordCollection.Count();
+		//sliderComponent.SetSpan(0, n_images);
+		//sliderComponent.SetSliderValue(n_images / 2f);
 		testQuad.GetComponent<Renderer>().material.mainTexture = GetTexture2DForRecord(series);
 
 		var seriesId = series.Get<string>(DicomTag.SeriesInstanceUID, "no series id");
@@ -492,14 +497,14 @@ public class LoadDICOM : MonoBehaviour
 			selectedObject = clone;
 			directoryMap[clone] = record;
 			clone.tag = "opened_series";
-			clone.GetComponent<TwoHandManipulatable>().enabled = true;
+			//clone.GetComponent<TwoHandManipulatable>().enabled = true;
 			clone.transform.Find("3D_toggle").gameObject.SetActive(true);
 			var slider = clone.transform.Find("zstack slider");
 			slider.gameObject.SetActive(true);
-			var sliderComponent = slider.GetComponent<SliderGestureControl>();
+			//var sliderComponent = slider.GetComponent<SliderGestureControl>();
 			var n_images = record.LowerLevelDirectoryRecordCollection.Count();
-			sliderComponent.SetSpan(0, n_images);
-			sliderComponent.SetSliderValue(n_images / 2f);
+			//sliderComponent.SetSpan(0, n_images);
+			//sliderComponent.SetSliderValue(n_images / 2f);
 			var openSeriesHandler = clone.GetComponent<OpenSeriesHandler>();
 			openSeriesHandler.record = record;
 			openSeriesHandler.loadDicomInstance = this;

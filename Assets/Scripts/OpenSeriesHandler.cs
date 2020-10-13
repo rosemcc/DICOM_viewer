@@ -1,4 +1,6 @@
-﻿using Dicom;
+﻿using Assets.Scripts.HoloToolkitLegacy;
+using Microsoft.MixedReality.Toolkit;
+using Dicom;
 using Dicom.Media;
 using HoloToolkit.Unity;
 using System.Collections;
@@ -63,7 +65,7 @@ public class OpenSeriesHandler : MonoBehaviour {
 				}
 
 
-				var volumeSizePow2 = MathExtensions.PowerOfTwoGreaterThanOrEqualTo(size);
+				var volumeSizePow2 = Assets.Scripts.HoloToolkitLegacy.MathExtensions.PowerOfTwoGreaterThanOrEqualTo(size);
 				var tex3D = VolumeTextureUtils.BuildTexture(vol, size, volumeSizePow2);
 
 				Debug.Log("created volume in " + (Time.realtimeSinceStartup - startTime) + "s");

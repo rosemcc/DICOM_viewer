@@ -11,7 +11,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 
 		public void ToggleGroup(int groupNumber)
 		{
-            PlayerController.Instance.SendToggleGroup(gameObject, groupNumber);
+            //PlayerController.Instance.SendToggleGroup(gameObject, groupNumber);
         }
 
 
@@ -27,7 +27,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 		{
             if (lastLabelState != toggle)
             {
-                PlayerController.Instance.SendToggleLabels(gameObject, toggle);
+                //PlayerController.Instance.SendToggleLabels(gameObject, toggle);
                 lastLabelState = toggle;
             }
         }
@@ -44,7 +44,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
         {
             if (lastSequState != sequ)
             {
-                PlayerController.Instance.SendToggleSequential(gameObject, sequ);
+                //PlayerController.Instance.SendToggleSequential(gameObject, sequ);
                 lastSequState = sequ;
             }
         }

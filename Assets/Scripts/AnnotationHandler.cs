@@ -1,10 +1,7 @@
-﻿using HoloToolkit.Unity.InputModule;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine;
 
-public class AnnotationHandler : MonoBehaviour, IInputHandler
+public class AnnotationHandler : MonoBehaviour, IMixedRealityInputHandler
 {
 	private OpenSeriesHandler openSeries;
 	public Annotation annotation;

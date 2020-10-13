@@ -13,7 +13,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 		{
 			if (samplingSitesActive != active)
 			{
-				PlayerController.Instance.SendToggleSamplingSites(gameObject, active);
+				//PlayerController.Instance.SendToggleSamplingSites(gameObject, active);
 				samplingSitesActive = active;
 			}
 		}
@@ -30,7 +30,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 		{
 			if (previousTime != currentTime)
 			{
-				PlayerController.Instance.SendTimeChangeEvent(gameObject, currentTime);
+				//PlayerController.Instance.SendTimeChangeEvent(gameObject, currentTime);
 				previousTime = currentTime;
 			}
 		}

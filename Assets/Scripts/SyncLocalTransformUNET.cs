@@ -1,5 +1,5 @@
-﻿using HoloToolkit.Unity.InputModule;
-using HoloToolkit.Unity.InputModule.Utilities.Interactions;
+﻿// using HoloToolkit.Unity.InputModule;
+// using HoloToolkit.Unity.InputModule.Utilities.Interactions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +8,24 @@ using UnityEngine.UI;
 
 namespace HoloToolkit.Unity.SharingWithUNET
 {
-	[RequireComponent(typeof(TwoHandManipulatable))]
+	// [RequireComponent(typeof(TwoHandManipulatable))]
 	public class SyncLocalTransformUNET : NetworkBehaviour
 	{
 		private Vector3 lastPos;
 		private Quaternion lastRot;
 		private Vector3 lastScale;
 
-		private TwoHandManipulatable twoHandManipulatable;
+		// private TwoHandManipulatable twoHandManipulatable;
 
 		IEnumerator SyncTransform()
 		{
 			while (true)
 			{
-				if (twoHandManipulatable.currentState != ManipulationMode.None && (transform.localPosition != lastPos || transform.localRotation != lastRot || transform.localScale != lastScale))
+				if (
+					// twoHandManipulatable.currentState != ManipulationMode.None &&
+					(transform.localPosition != lastPos || transform.localRotation != lastRot || transform.localScale != lastScale))
 				{
-					PlayerController.Instance.SendSharedTransform(gameObject, transform.localPosition, transform.localRotation, transform.localScale);
+					// PlayerController.Instance.SendSharedTransform(gameObject, transform.localPosition, transform.localRotation, transform.localScale);
 					lastPos = transform.localPosition;
 					lastRot = transform.localRotation;
 					lastScale = transform.localScale;
@@ -35,7 +37,9 @@ namespace HoloToolkit.Unity.SharingWithUNET
 		[ClientRpc(channel = Channels.DefaultUnreliable)]
 		public void RpcSetLocalTransform(Vector3 position, Quaternion rotation, Vector3 scale)
 		{
-			if (twoHandManipulatable.currentState == ManipulationMode.None)
+			if (true
+				// twoHandManipulatable.currentState == ManipulationMode.None
+				)
 			{
 				transform.localPosition = position;
 				transform.localRotation = rotation;
@@ -44,14 +48,14 @@ namespace HoloToolkit.Unity.SharingWithUNET
 		}
 
 		public void ResetTransform(Vector3 newPos, Quaternion newRot, Vector3 newScale) {
-			PlayerController.Instance.SendSharedTransform(gameObject, newPos, newRot, newScale);
+			// PlayerController.Instance.SendSharedTransform(gameObject, newPos, newRot, newScale);
 			lastPos = newPos;
 			lastRot = newRot;
 			lastScale = newScale;
 		}
 
 		public void SetSavedPosition(Vector3 newPos, Quaternion newRot, Vector3 newScale) {
-			PlayerController.Instance.SendSharedSavedPosition(gameObject, transform.localPosition, transform.localRotation, transform.localScale);
+			// PlayerController.Instance.SendSharedSavedPosition(gameObject, transform.localPosition, transform.localRotation, transform.localScale);
 		}
 
 
@@ -62,7 +66,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 		}
 
 		public void LockTransform(string lockState) {
-			PlayerController.Instance.SendLockTransform(gameObject, lockState);
+			// PlayerController.Instance.SendLockTransform(gameObject, lockState);
 		}
 
 		[ClientRpc(channel = Channels.DefaultUnreliable)]
@@ -73,12 +77,12 @@ namespace HoloToolkit.Unity.SharingWithUNET
 			if (lockState == "Lock")
 			{
 				posComponent.lockText.GetComponent<Text>().text = "Unlock";
-				posComponent.skel.GetComponent<TwoHandManipulatable>().enabled = false;
+				// posComponent.skel.GetComponent<TwoHandManipulatable>().enabled = false;
 			}
 			else
 			{
 				posComponent.lockText.GetComponent<Text>().text = "Lock";
-				posComponent.skel.GetComponent<TwoHandManipulatable>().enabled = true;
+				// posComponent.skel.GetComponent<TwoHandManipulatable>().enabled = true;
 			}
 		}
 
@@ -87,7 +91,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 			lastPos = transform.localPosition;
 			lastRot = transform.localRotation;
 			lastScale = transform.localScale;
-			twoHandManipulatable = GetComponent<TwoHandManipulatable>();
+			// twoHandManipulatable = GetComponent<TwoHandManipulatable>();
 			StartCoroutine(SyncTransform());
 		}
 	}
